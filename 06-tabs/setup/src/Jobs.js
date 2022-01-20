@@ -10,13 +10,14 @@ const Jobs = ({ jobs }) => {
       {/* btn-container */}
       <div className="btn-container">
         {jobs.map((job, index) => {
+          const { company, id } = job;
           return (
             <button
               className={`job-btn ${index === value && 'active-btn'}`}
-              key={index}
+              key={id}
               onClick={() => setValue(index)}
             >
-              {job.company}
+              {company}
             </button>
           );
         })}
