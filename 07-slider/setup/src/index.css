@@ -242,6 +242,9 @@ article {
   /* opacity: 0; */
   transition: var(--transition);
 }
+article.nextSlide {
+  transform: translateX(100%);
+}
 /* article.activeSlide {
   opacity: 1;
   transform: translateX(0);
@@ -249,6 +252,4 @@ article {
 article.lastSlide {
   transform: translateX(-100%);
 }
-article.nextSlide {
-  transform: translateX(100%);
-} */
+ */

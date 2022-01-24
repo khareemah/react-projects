@@ -232,6 +232,7 @@ Grocery List
   transition: var(--transition);
   font-size: 0.85rem;
 }
+
 .submit-btn:hover {
   background: var(--clr-primary-5);
   color: var(--clr-white);
