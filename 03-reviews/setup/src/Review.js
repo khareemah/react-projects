@@ -17,18 +17,18 @@ const Review = () => {
 
   const showRandomImage = () => {
     let randomNumber = Math.floor(Math.random() * people.length);
-    if (index === randomNumber) {
-      randomNumber = checkIndex(randomNumber + 1);
+    if (randomNumber === index) {
+      randomNumber += 1;
     }
-    setIndex(randomNumber);
+    setIndex(checkIndex(randomNumber));
   };
   const checkIndex = (index) => {
-    if (index > people.length - 1) {
-      const newIndex = 0;
+    if (index === people.length) {
+      let newIndex = 0;
       return newIndex;
     }
     if (index < 0) {
-      const newIndex = people.length - 1;
+      let newIndex = people.length - 1;
       return newIndex;
     }
     return index;

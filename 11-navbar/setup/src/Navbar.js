@@ -13,7 +13,7 @@ const Navbar = () => {
     if (toggle) {
       linksContainerRef.current.style.height = `${linksHeight}px`;
     } else {
-      linksContainerRef.current.style.height = `0px`;
+      linksContainerRef.current.style.height = '0px';
     }
   }, [toggle]);
   return (
