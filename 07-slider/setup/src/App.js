@@ -7,15 +7,16 @@ function App() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    const lastValue = people.length - 1;
     if (index < 0) {
-      let newIndex = people.length - 1;
+      let newIndex = lastValue;
       setIndex(newIndex);
     }
-    if (index > people.length - 1) {
+    if (index > lastValue) {
       let newIndex = 0;
       setIndex(newIndex);
     }
-  }, [index, people]);
+  }, [index]);
 
   useEffect(() => {
     const timeout = setInterval(() => {
