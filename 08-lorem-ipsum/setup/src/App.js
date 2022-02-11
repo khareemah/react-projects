@@ -6,15 +6,13 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data.length);
-    console.log(data.slice(0, 1));
+
     if (count <= 0) {
       setParagraphs(data.slice(0, 1));
       return;
     }
     if (count > data.length) {
       setParagraphs(data.slice(0, data.length));
-      console.log(paragraphs.length);
       return;
     }
     setParagraphs(data.slice(0, count));
