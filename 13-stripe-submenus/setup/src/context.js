@@ -14,7 +14,7 @@ const AppProvider = ({ children }) => {
     setIsSidebarOpen(false);
   };
   const openSubmenu = (text, coordinates) => {
-    const page = sublinks.find((sublink) => sublink.page == text);
+    const page = sublinks.find((sublink) => sublink.page === text);
     setPage(page);
     setLocation(coordinates);
     setIsSubmenuOpen(true);
