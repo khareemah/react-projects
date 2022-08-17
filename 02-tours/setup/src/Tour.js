@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-const Tour = ({ id, name, image, info, price, removeTour }) => {
+const Tour = ({ id, name, image, info, price }) => {
   const [readMore, setReadMore] = useState(false);
+  const removeTour = useContext(ToursContext);
   return (
     <>
       <article className="single-tour">
@@ -9,12 +10,12 @@ const Tour = ({ id, name, image, info, price, removeTour }) => {
         <footer>
           <div className="tour-info">
             <h4>{name}</h4>
-            <h4 className="tour-price">${price}</h4>
+            <h4 className="tour-price">{price}</h4>
           </div>
           <p>
-            {!readMore ? `${info.substring(0, 200)}...` : info}
+            {readMore ? info : info.substring(0, 250)}
             <button onClick={() => setReadMore(!readMore)}>
-              {!readMore ? 'read more' : 'show less'}
+              {readMore ? 'show less' : 'read more'}
             </button>
           </p>
           <button className="delete-btn" onClick={() => removeTour(id)}>
