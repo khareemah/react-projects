@@ -1,11 +1,11 @@
 const paginate = (data) => {
-  const itemsOnaPage = 10;
-  const noOfPages = Math.ceil(data.length / itemsOnaPage);
-  const arrOfArr = Array.from({ length: noOfPages }, (_, i) => {
-    const start = i * itemsOnaPage;
-    return data.slice(start, start + itemsOnaPage);
+  const itemsPerPage = 9;
+  const noOfPages = Math.ceil(data.length / itemsPerPage);
+  const pages = Array.from({ length: noOfPages }, (_, index) => {
+    const start = index * itemsPerPage;
+    return data.slice(start, start + itemsPerPage);
   });
-  return arrOfArr;
+  return pages;
 };
 
 export default paginate;
