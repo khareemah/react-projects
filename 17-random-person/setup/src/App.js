@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   FaEnvelopeOpen,
   FaUser,
@@ -7,103 +7,107 @@ import {
   FaPhone,
   FaLock,
   FaAccessibleIcon,
-} from 'react-icons/fa';
-const url = 'https://randomuser.me/api/';
-const defaultImage = 'https://randomuser.me/api/portraits/men/75.jpg';
+} from "react-icons/fa";
+const url = "https://randomuser.me/api/";
+const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [person, setPerson] = useState(null);
-  const [title, setTitle] = useState('name');
-  const [value, setValue] = useState('random Person');
-  const [image, setImage] = useState(defaultImage);
+  const [person, setPerson] = useState({});
+  const [key, setKey] = useState("name");
+  const [value, setValue] = useState("random person");
 
-  const handleOver = (e) => {
-    e.preventDefault();
-    if (e.target.classList.contains('icon')) {
-      const title = e.target.dataset.label;
-      setTitle(title);
-      setValue(person[title]);
-    }
+  const handleMouseOver = (key) => {
+    setKey(key);
+    setValue(person[key]);
   };
   const fetchPerson = async () => {
     const response = await fetch(url);
     const data = await response.json();
-    const person = data.results[0];
-
-    const { email, phone } = person;
-    const image = person.picture.large;
-    const age = person.dob.age;
-    const password = person.login.password;
-    const { first, last } = person.name;
-    const { postcode, country } = person.location;
-    const newPerson = {
-      image,
-      phone,
+    const personData = data.results[0];
+    const {
+      name,
       email,
-      password,
+      dob: { age },
+      location: { street },
+      phone,
+      picture: { large },
+      login: { password },
+    } = personData;
+    const newPerson = {
+      name: `${name.first} ${name.last}`,
+      email,
       age,
-      street: `${postcode} ${country}`,
-      name: `${first} ${last}`,
+      street: `${street.name} ${street.number}`,
+      phone,
+      img: large,
+      password,
     };
 
     setPerson(newPerson);
-    setIsLoading(false);
-    setTitle('name');
     setValue(newPerson.name);
-    setImage(newPerson.image);
   };
-
   useEffect(() => {
     fetchPerson();
   }, []);
 
   return (
     <main>
-      <div className="block bcg-black"> </div>
+      <div className="block bcg-black"></div>
       <div className="block">
         <div className="container">
-          <img src={image} alt="random user" />
-          <p className="user-title">My {title} is</p>
-          <p className="user-value">{value || 'no value available'}</p>
+          <img
+            src={(person && person.img) || defaultImage}
+            alt="random user"
+            className="user-img"
+          />
+          <p className="user-title">My {key} is</p>
+          <p className="user-value">{value}</p>
           <div className="values-list">
-            <button data-label="name" onMouseOver={handleOver} className="icon">
+            <button
+              className="icon"
+              data-label="name"
+              onMouseOver={() => handleMouseOver("name")}
+            >
               <FaUser />
             </button>
             <button
-              data-label="email"
-              onMouseOver={handleOver}
               className="icon"
+              data-label="email"
+              onMouseOver={() => handleMouseOver("email")}
             >
               <FaEnvelopeOpen />
             </button>
-            <button data-label="age" onMouseOver={handleOver} className="icon">
+            <button
+              className="icon"
+              data-label="age"
+              onMouseOver={() => handleMouseOver("age")}
+            >
               <FaCalendarTimes />
             </button>
             <button
-              data-label="street"
-              onMouseOver={handleOver}
               className="icon"
+              data-label="street"
+              onMouseOver={() => handleMouseOver("street")}
             >
               <FaMap />
             </button>
             <button
-              data-label="phone"
-              onMouseOver={handleOver}
               className="icon"
+              data-label="phone"
+              onMouseOver={() => handleMouseOver("phone")}
             >
               <FaPhone />
             </button>
             <button
-              data-label="password"
-              onMouseOver={handleOver}
               className="icon"
+              data-label="password"
+              onMouseOver={() => handleMouseOver("password")}
             >
               <FaLock />
             </button>
           </div>
           <button className="btn" type="button" onClick={fetchPerson}>
-            {isLoading ? 'Loading...' : 'Random user'}
+            "random user"
           </button>
         </div>
       </div>
